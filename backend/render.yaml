@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: chat-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    repo: cool.chat
+    branch: main
