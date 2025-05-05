@@ -1,21 +1,20 @@
-const WebSocket = require("ws");
-const PORT = process.env.PORT || 10000;
-const server = new WebSocket.Server({ port: PORT });
+const express = require('express');
+const WebSocket = require('ws');
 
-let clients = [];
+const app = express();
+const port = process.env.PORT || 3000;  // Use Railway's dynamic port
 
-server.on("connection", (ws) => {
-  clients.push(ws);
-  ws.on("message", (data) => {
-    clients.forEach((client) => {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(data);
-      }
-    });
-  });
-  ws.on("close", () => {
-    clients = clients.filter(c => c !== ws);
+const wss = new WebSocket.Server({ noServer: true });
+
+// Handle WebSocket connections
+wss.on('connection', (ws) => {
+  ws.on('message', (message) => {
+    console.log(`received: ${message}`);
+    ws.send('Hello, client!');
   });
 });
 
-console.log(`WebSocket server running on port ${PORT}`);
+// Ensure your server is listening to the correct port
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
