@@ -1,5 +1,5 @@
 let username = "";
-const socket = new WebSocket("https://cool-chat-qgqm.onrender.com");
+const socket = new WebSocket("wss://cool-chat-backend.fly.dev");
 
 document.getElementById("username").addEventListener("keypress", function(e) {
   if (e.key === "Enter" && this.value.trim() !== "") {
