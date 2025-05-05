@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: chat-backend
-    runtime: node
-    branch: main
-    buildCommand: npm install
-    startCommand: node server.js
-    plan: free
-    region: oregon
